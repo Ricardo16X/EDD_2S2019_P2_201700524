@@ -10,14 +10,7 @@ lectura.lector_csv()
 mi_avl = arbol_avl.arbol_avl()
 
 raiz = None
-raiz = mi_avl.insert(raiz, 10)
-raiz = mi_avl.insert(raiz, 20)
-raiz = mi_avl.insert(raiz, 30)
-raiz = mi_avl.insert(raiz, 40)
-raiz = mi_avl.insert(raiz, 50)
-raiz = mi_avl.insert(raiz, 25)
 
-mi_avl.preOrder(raiz)
 
 # Ingreso de IP y Host de Conexión:
 #try:
