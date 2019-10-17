@@ -3,22 +3,25 @@ import json
 import sys
 import os
 
-def lector_csv():
-    ## Función para leer los archivos CSV
-    print("\nEjecutando Lectura CSV...")
-    nom_arch = input("Escribe el nombre del archivo: ")
+class lectura():
 
-    archivo = open(nom_arch)
-    csv_file = csv.reader(archivo, delimiter=',')
-    lista = []
-    for linea in csv_file:
-        lista += linea
+    def lector_csv(self):
+        # Función para leer los archivos CSV
+        print("\nEjecutando Lectura CSV...")
+        nom_arch = input("Escribe el nombre del archivo: ")
 
-    clase = lista[1]
-    print(clase)
-    datos = lista[3]
-    print(datos)
+        archivo = open("bloques/" + nom_arch)
+        csv_file = csv.reader(archivo, delimiter=',')
+        lista = []
+        for linea in csv_file:
+            lista += linea
 
-def lector_json():
-    ## Función para leer los archivos JSON
-    print("Ejecutando Lectura JSON")
+        clase = lista[1]
+        print(clase)
+        datos = lista[3]
+        print(datos)
+
+    def lector_json(self, string_json):
+        # Función para leer los archivos JSON
+        print("Ejecutando Lectura JSON")
+        
