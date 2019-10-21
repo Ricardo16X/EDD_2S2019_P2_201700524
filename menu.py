@@ -16,20 +16,18 @@ avl = arbol_avl.arbol_avl()
 cli = cliente.Cliente()
 block = blocks.listaDoble()
 
-# ip = sys.argv[1]    ## Variables Globales IP
-# puerto = int(sys.argv[2])   ## Variables Globales Port
+ip = sys.argv[1]    ## Variables Globales IP
+puerto = int(sys.argv[2])   ## Variables Globales Port
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 json_volando = ""
 
 def connect():
-    # if len(sys.argv) != 3:
-    if False:
+    if len(sys.argv) != 3:
         print("Ingresa los parámetros de esta manera: script ip puerto")
     else:
-        #ip = sys.argv[1]
-        #puerto = sys.argv[2]
-        #server.connect((ip, int(puerto)))
-        server.connect(("192.168.1.4", 8080))
+        ip = sys.argv[1]
+        puerto = sys.argv[2]
+        server.connect((ip, int(puerto)))
         mensaje = ""
         while True:
             try:
