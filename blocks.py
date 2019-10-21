@@ -1,5 +1,6 @@
 ## Lista enlazada doble para almacenar la información del JSON
-class nodoLista(object):
+import json
+class nodoLista():
     ## Elementos que contendrá el nodo de la lista enlazada
     def __init__(self,_str_json):
         self.str_json = _str_json
@@ -7,8 +8,10 @@ class nodoLista(object):
         # puntadores
         self.siguiente = None
         self.anterior = None
+        self.primero = None
+        self.ultimo = None
 
-class listaDoble(object):
+class listaDoble():
     def __init__(self):
         self.primero = None
         self.ultimo = None
@@ -22,8 +25,24 @@ class listaDoble(object):
         else:
             # Si hay datos en el blockchain
             nuevoBloque = nodoLista(bloque)
-
+            nuevoBloque.index = self.ultimo.index + 1
+            
             self.ultimo.siguiente = nuevoBloque
             nuevoBloque.anterior = self.ultimo
             self.ultimo = nuevoBloque
-            nuevoBloque.index = self.ultimo.index + 1
+
+    def getLastIndex(self):
+        if self.primero is None:
+            return 0
+        else:
+            return int(self.ultimo.index)
+    
+    def getHash(self):
+        if self.primero is None:
+            return "0000"
+        else:
+            try:
+                obtenerHash = json.loads(self.ultimo.str_json)
+                return obtenerHash["HASH"]
+            except Exception:
+                print("Error al obtener el Hash Anterior")
