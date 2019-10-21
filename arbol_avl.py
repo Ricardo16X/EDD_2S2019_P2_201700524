@@ -1,15 +1,18 @@
 class nodoArbol(object):
-    def __init__(self, val):
-        self.val = val
+    def __init__(self, _carne, _nom):
+        self.carne = _carne
+        self.nombre = _nom
+        self.FE = 0
         self.left = None
         self.right = None
         self.height = 1
 
 class arbol_avl(object):
     def insert(self, raiz, valor):
+        contenido = str(valor).split("-")
         if not raiz:
-            return nodoArbol(valor)
-        elif valor < raiz.val:
+            return nodoArbol(contenido[0], contenido[1])
+        elif contenido[0] < raiz.carne:
             raiz.left = self.insert(raiz.left, valor)
         else:
             raiz.right = self.insert(raiz.right, valor)
@@ -20,24 +23,27 @@ class arbol_avl(object):
 
         # Obtener el Factor de Equilibrio
         balance = self.getBalance(raiz)
-
+        raiz.FE = balance
         # Si el nodo está desbalanceado
         # entonces se intentará los 4 casos de inserción
         # Caso 1 - Izq Izq
-        if balance > 1 and valor < raiz.left.val:
+        if balance > 1 and contenido[0] < raiz.left.carne:
             return self.RotacionDerecha(raiz)
         # Caso 2 - Der Der
-        if balance < -1 and valor > raiz.right.val:
+        if balance < -1 and contenido[0] > raiz.right.carne:
             return self.RotacionIzquierda(raiz)
         # Caseo 3 - Izq Der
-        if balance > 1 and valor > raiz.left.val:
+        if balance > 1 and contenido[0] > raiz.left.carne:
             raiz.left = self.RotacionIzquierda(raiz.left)
             return self.RotacionDerecha(raiz)
         # Caso 4 - Der Izq
-        if balance < -1 and valor < raiz.right.val:
+        if balance < -1 and contenido[0] < raiz.right.carne:
             raiz.right = self.RotacionDerecha(raiz.right)
             return self.RotacionIzquierda(raiz)
 
+        balance = self.getBalance(raiz)
+        raiz.FE = balance
+        
         return raiz
 
     def RotacionDerecha(self, z):
@@ -77,10 +83,3 @@ class arbol_avl(object):
         if not raiz:
             return 0
         return self.getHeight(raiz.left) - self.getHeight(raiz.right)
-
-    def preOrder(self, raiz):
-        if not raiz:
-            return
-        print("{0} ".format(raiz.val), end="")
-        self.preOrder(raiz.left)
-        self.preOrder(raiz.right)

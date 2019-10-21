@@ -21,7 +21,7 @@ class lectura():
 
         json_generado = "{"
 
-        json_generado += "\"INDEX\": " + str(_index_) + ","
+        json_generado += "\"INDEX\": " + str(_index_ + 1) + ","
         
         json_generado += "\"TIMESTAMP\": " + "\"" + \
             time.strftime(("%d-%m-%y-::%H:%M:%S")) + "\","
@@ -35,7 +35,7 @@ class lectura():
         
         json_generado += "\"PREVIOUSHASH\": " + "\"" + phash + "\"" + ","
         
-        json_generado += "\"HASH\": " + "\"" + cliente.Cliente().sha_256(int(_index_), time.strftime(
+        json_generado += "\"HASH\": " + "\"" + cliente.Cliente().sha_256(int(_index_ + 1), time.strftime(
             ("%d-%m-%y-::%H:%M:%S")), elementos[1], datos, phash) + "\""
         
         json_generado += "}"
@@ -48,10 +48,11 @@ class lectura():
         # Método para generar el árbol AVL cuando pueda insertar el bloque al blockchain
         if d["left"] is not None:
             self.objetosValue(obj, d["left"])
+            
         obj.append(d["value"])
+
         if d["right"] is not None:
             self.objetosValue(obj, d["right"])
-        return obj
 
     def lector_json(self, string_json, server):
         # Función para leer los archivos JSON

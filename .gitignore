@@ -4,3 +4,6 @@
 /bloques
 *.json
 /.vscode
+*.dot
+*.jpg
+*.png

@@ -20,7 +20,6 @@ block = blocks.listaDoble()
 # puerto = int(sys.argv[2])   ## Variables Globales Port
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 json_volando = ""
-global insertar
 
 def connect():
     # if len(sys.argv) != 3:
@@ -34,7 +33,7 @@ def connect():
         mensaje = ""
         while True:
             try:
-                read_sockets = select.select([server], [], [], 1)[0]
+                read_sockets = select.select([server], [], [], 0)[0]
                 for socks in read_sockets:
                     if socks == server:
                         ## Aqui estoy recibiendo información del server...
@@ -45,7 +44,6 @@ def connect():
                                 print("Bloque Insertado")
                         else:
                             # json
-                            insertar = False
                             mensaje = mensaje[2:len(mensaje) - 1]
                             json_volando = mensaje
                             lector.lector_json(mensaje, server)
@@ -94,16 +92,21 @@ def menu():
                             if copia.siguiente is not None:
                                 copia = copia.siguiente
                                 lector.visualizar_json(copia.str_json)
+                        elif ret == 13:  # Ingreso de ENTER
+                            cli.reportes(copia.str_json)
             else:
                 print("El bloque no contiene datos...")
 
         elif op == 3:
             # Generar Reportes de...
             print("Generar Reportes ##Seleccionado")
+            block.graphic()
         elif op == 4:
             # Salir
             print("Salir ##Seleccionado")
             server.close()
+            hilo_m._delete()
+            hilo_c._delete()
             break
         else:
             print("No ha seleccionado una opción válida. \nIntente nuevamente... ")
