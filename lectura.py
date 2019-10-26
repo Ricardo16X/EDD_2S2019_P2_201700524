@@ -57,6 +57,8 @@ class lectura():
     def lector_json(self, string_json, server):
         # Función para leer los archivos JSON
         try:
+            string_json = string_json.replace("\"{", "{")
+            string_json = string_json.replace("}\"", "}")
             data = json.loads(string_json)
 
             index = data["INDEX"]

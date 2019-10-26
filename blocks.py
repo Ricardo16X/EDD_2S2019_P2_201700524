@@ -18,6 +18,8 @@ class listaDoble():
         self.ultimo = None
 
     def insert(self, bloque):
+        bloque = bloque.replace("\"{", "{")
+        bloque = bloque.replace("}\"", "}")
         if self.primero is None:
             # No hay ningun dato:
             nuevoBloque = nodoLista(bloque)
@@ -77,3 +79,4 @@ class listaDoble():
             nuevoArchivo.close()
             os.system("dot -Tjpg BlockChain.dot -o BlockChain.jpg")
             os.system("BlockChain.jpg")
+            
