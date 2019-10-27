@@ -40,9 +40,6 @@ class arbol_avl(object):
         if balance < -1 and contenido[0] < raiz.right.carne:
             raiz.right = self.RotacionDerecha(raiz.right)
             return self.RotacionIzquierda(raiz)
-
-        balance = self.getBalance(raiz)
-        raiz.FE = balance
         
         return raiz
 
@@ -57,6 +54,8 @@ class arbol_avl(object):
         y.height = 1 + max(self.getHeight(y.left), self.getHeight(y.right))
 
         # Retornamos la nueva raiz.
+        y.FE = self.getBalance(y)
+        z.FE = self.getBalance(z)
         return y
 
     def RotacionIzquierda(self, z):
@@ -72,6 +71,8 @@ class arbol_avl(object):
                                 self.getHeight(y.right))
         # Retornamos la nueva raiz después del balanceo o movimiento
         # hacia la izquierda.
+        y.FE = self.getBalance(y)
+        z.FE = self.getBalance(z)
         return y
 
     def getHeight(self, raiz):
